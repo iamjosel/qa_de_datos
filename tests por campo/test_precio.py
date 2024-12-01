@@ -30,9 +30,9 @@ logger = logging.getLogger(__name__)
 # Función para cargar los datos
 @pytest.fixture
 def load_data():
-    '''Carga los datos del archivo Excel.'''
-    file_path = "O:/productos/ventas1.xlsx"
-    return pd.read_excel(file_path)
+    # Cargar los datos desde el archivo Excel
+    data = pd.read_excel("O:/productos/ventas1.xlsx")
+    return data
 
 # Caso 1: Determinar el valor más alto en la columna 'precio'
 def test_max_value_in_price(load_data):
@@ -269,3 +269,44 @@ def test_values_exact_begin_with_minus_in_price_total(load_data, expected_count)
     else:
         logger.error(f"Error: se esperaban {expected_count} registros, pero la cantidad de registros que empiezan con - son: {minus_start_values}")
         assert minus_start_values == expected_count, (f"Se esperaba que el número de registros fuesen {expected_count}, pero se encontraron: {minus_start_values}.")
+
+@pytest.mark.parametrize(
+    "test_name, validation_function, expected_value",
+    [
+        # Caso 2: Valor más alto en la columna 'precio'
+        ("Valor más alto", lambda data: pd.to_numeric(data['precio'], errors='coerce').max(), 849.91),
+        
+        # Caso 4: Valor más bajo en la columna 'precio'
+        ("Valor más bajo", lambda data: pd.to_numeric(data['precio'], errors='coerce').min(), -844.33),
+        
+        # Caso 6: Registros positivos en la columna 'precio'
+        ("Registros positivos 1", lambda data: pd.to_numeric(data['precio'], errors='coerce').gt(0).sum(), 5368),
+                    
+        # Caso 12: Registros negativos en la columna 'precio'
+        ("Sin valores negativos", lambda data: pd.to_numeric(data['precio'], errors='coerce').lt(0).sum(), 492),
+             
+        # Caso 16: Registros string en la columna 'precio'
+        ("Registros como string", lambda data: data['precio'].apply(lambda x: isinstance(x, str)).sum(), 6085),
+        
+        # Caso 18: Valores entre 100 y 200 en la columna 'precio'
+        ("Valores entre 100 y 200", lambda data: pd.to_numeric(data['precio'], errors='coerce').between(100, 200).sum(), 923),
+        
+        # Caso 20: Valores que empiezan con '$' en la columna 'precio'
+        ("Empiezan con $", lambda data: data['precio'].astype(str).str.startswith('$').sum(), 225),
+        
+        # Caso 22: Valores que empiezan con '-' en la columna 'precio'
+        ("Empiezan con - (492 registros)", lambda data: data['precio'].astype(str).str.startswith('-').sum(), 492),
+        
+        # Caso 24: Valores que empiezan con '-' en la columna 'precio'
+        ("Empiezan con - (507 registros)", lambda data: data['precio'].astype(str).str.contains('-').sum(), 507),
+    ]
+)
+def test_validations(load_data, test_name, validation_function, expected_value):
+    '''Validaciones parametrizadas para diferentes casos en la columna 'precio'.'''
+    data = load_data
+    result = validation_function(data)
+    if result == expected_value:
+        logger.info(f"{test_name}: Validación exitosa. Resultado esperado y obtenido: {result}")
+    else:
+        logger.error(f"{test_name}: Error. Se esperaba {expected_value}, pero se encontró {result}")
+    assert result == expected_value, f"{test_name}: Se esperaba {expected_value}, pero se encontró {result}."
