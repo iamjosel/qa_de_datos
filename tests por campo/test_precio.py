@@ -4,7 +4,7 @@ import logging
 
 '''
 @uthor: José Luis García Quinayás
-date: 25/11/2024
+date: 30/11/2024
 github: https://github.com/iamjosel
 contacto: iamjoseluisg@gmail.com
 '''
@@ -297,7 +297,7 @@ def test_values_exact_begin_with_minus_in_price_total(load_data, expected_count)
         # Caso 22: Valores que empiezan con '-' en la columna 'precio'
         ("Empiezan con - (492 registros)", lambda data: data['precio'].astype(str).str.startswith('-').sum(), 492),
         
-        # Caso 24: Valores que empiezan con '-' en la columna 'precio'
+        # Caso 24: Valores que contienen '-' en la columna 'precio'
         ("Empiezan con - (507 registros)", lambda data: data['precio'].astype(str).str.contains('-').sum(), 507),
     ]
 )
