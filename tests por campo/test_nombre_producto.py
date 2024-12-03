@@ -24,12 +24,6 @@ pytest test_nombre_producto.py -v --tb=short --log-cli-level=INFO --html=report_
 
 '''
 
-'''
-Test cases for the column 'nombre_producto'.
-Author: José Luis García Quinayás
-Date: 2024-11-21
-'''
-
 # Configuración del logger
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -191,7 +185,7 @@ def test_count_starts_with_t_mayus(load_data):
 
 # Caso de prueba 18: Validar número específico de registros que comienzan con 'T'
 @pytest.mark.parametrize("expected_count", [2671])  # Cambia 100 al valor esperado real
-def test_validate_starts_with_t_count_mayus(load_data, expected_count):
+def test_validate_starts_with_t_count_mayus(load_data, expected_count):            
     """Caso de prueba 18: Validar número específico de registros que comienzan con 'T'."""
     data = load_data
     starts_with_t_mayus = data['nombre_producto'].str.startswith('T', na=False).sum()

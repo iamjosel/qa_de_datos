@@ -20,7 +20,7 @@ pytest --html=report.html --self-contained-html
 pytest -v --tb=short --log-cli-level=INFO
 
 3. comando para ver los que pasaron, fallaron, logs y reporte html
-pytest -v --tb=short --log-cli-level=INFO --html=report_campo_fecha_venta.html --self-contained-html
+pytest test_fecha_venta.py -v --tb=short --log-cli-level=INFO --html=report_campo_fecha_venta.html --self-contained-html
 
 '''
 

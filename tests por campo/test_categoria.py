@@ -218,23 +218,23 @@ def test_detect_null_or_empty_values_in_category(load_data):
 #@pytest.mark.skip
 @pytest.mark.parametrize("expected_count", [36])
 def test_validate_null_category_count(load_data, expected_count):
-    '''Caso de prueba 21: Validar si la cantidad de registros vacíos o nulos en 'categoria' corresponde a 36.'''
+    '''Caso de prueba 20: Validar si la cantidad de registros vacíos o nulos en 'categoria' corresponde a 36.'''
     data = load_data
     null_count = data['categoria'].isnull().sum()
     logger.info(f"Registros vacíos o nulos en 'categoria': {null_count}")
     assert null_count == expected_count, (f"Se esperaban {expected_count} registros nulos, pero se encontraron {null_count}.")
 
-# Caso 22: Identificar registros en `categoria` que contienen exclusivamente `Ã`
+# Caso 21: Identificar registros en `categoria` que contienen exclusivamente `Ã`
 def test_find_categories_with_char_ao_two(load_data):
-    '''Caso 22: Identificar registros en la columna `categoria` que contienen el carácter `Ã`.'''
+    '''Caso 21: Identificar registros en la columna `categoria` que contienen el carácter `Ã`.'''
     data = load_data
     contains_char_ao = data['categoria'].apply(lambda x: 'FotografÃ­a' in x if isinstance(x, str) else False)
     logger.info(f"Registros con el carácter `Ã` en `categoria`: {contains_char_ao.sum()}")
     assert contains_char_ao.sum() > 0, "No se encontraron registros con el carácter `Ã` en `categoria`."
 
-# Caso 23: Contar registros en `categoria` que contienen exclusivamente `Ã`
+# Caso 22: Contar registros en `categoria` que contienen exclusivamente `Ã`
 def test_count_categories_with_char_ao_two(load_data):
-    '''Caso 23: Contar los registros en `categoria` que contienen el carácter `Ã`.'''
+    '''Caso 22: Contar los registros en `categoria` que contienen el carácter `Ã`.'''
     data = load_data
     count_char_ao = data['categoria'].apply(lambda x: 'FotografÃ­a' in x if isinstance(x, str) else False).sum()
     logger.info(f"Total de registros con el carácter `Ã` en `categoria`: {count_char_ao}")
@@ -258,26 +258,26 @@ def test_validate_category_case_insensitive_ao_count(load_data, expected_count):
     # Verificar si la suma total corresponde al valor esperado
     assert total_count == expected_count, (f"Se esperaban {expected_count} registros, pero se encontraron {total_count}.")
 
-# Caso 25: Identificar registros en `categoria` que contienen exclusivamente `Ã³`
+# Caso 23: Identificar registros en `categoria` que contienen exclusivamente `Ã³`
 def test_find_categories_with_char_ao(load_data):
-    '''Caso 25: Identificar registros en la columna `categoria` que contienen el carácter `Ã³`.'''
+    '''Caso 23: Identificar registros en la columna `categoria` que contienen el carácter `Ã³`.'''
     data = load_data
     contains_char_ao = data['categoria'].apply(lambda x: 'Ã³' in x if isinstance(x, str) else False)
     logger.info(f"Registros con el carácter `Ã³` en `categoria`: {contains_char_ao.sum()}")
     assert contains_char_ao.sum() > 0, "No se encontraron registros con el carácter `Ã³` en `categoria`."
 
-# Caso 26: Contar registros en `categoria` que contienen exclusivamente `Ã³`
+# Caso 24: Contar registros en `categoria` que contienen exclusivamente `Ã³`
 def test_count_categories_with_char_ao(load_data):
-    '''Caso 26: Contar los registros en `categoria` que contienen el carácter `Ã³`.'''
+    '''Caso 24: Contar los registros en `categoria` que contienen el carácter `Ã³`.'''
     data = load_data
     count_char_ao = data['categoria'].apply(lambda x: 'Ã³' in x if isinstance(x, str) else False).sum()
     logger.info(f"Total de registros con el carácter `Ã³` en `categoria`: {count_char_ao}")
     assert count_char_ao > 0, "No se encontraron registros con el carácter `Ã³` en `categoria`."
 
-# Caso 27: Validar si el número de registros en `categoria` con `Ã³` corresponde a 2728
+# Caso 25: Validar si el número de registros en `categoria` con `Ã³` corresponde a 2728
 @pytest.mark.parametrize("expected_count", [2728])
 def test_validate_category_char_ao_count(load_data, expected_count):
-    '''Caso 27: Validar si la cantidad de registros en `categoria` con el carácter `Ã³` corresponde a 2728.'''
+    '''Caso 25: Validar si la cantidad de registros en `categoria` con el carácter `Ã³` corresponde a 2728.'''
     data = load_data
     count_char_ao = data['categoria'].apply(lambda x: 'Ã³' in x if isinstance(x, str) else False).sum()
     logger.info(f"Registros con el carácter `Ã³` en `categoria`: {count_char_ao}")

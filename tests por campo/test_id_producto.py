@@ -43,7 +43,6 @@ def test_unique_values_in_id_producto(load_data):
     assert len(unique_values) > 0  # Asegurarse de que existen valores únicos
 
 # '''Caso de prueba 2: Contar cuántos valores únicos existen en la columna id_producto.'''
-
 def test_count_unique_values_in_id_producto(load_data):
     """Caso de prueba 2: Contar valores únicos en id_producto."""
     # Contar valores únicos
@@ -52,7 +51,6 @@ def test_count_unique_values_in_id_producto(load_data):
     assert unique_count > 0  # Asegurarse de que el conteo es mayor a 0
 
 # '''Caso de prueba 3: Confirmar que el número de valores únicos coincide con un valor específico (n).'''
-
 def test_specific_count_unique_values(load_data):
     """Caso de prueba 3: Validar número específico de valores únicos."""
     n = 1716  # Aquí coloca el número específico esperado
@@ -61,7 +59,6 @@ def test_specific_count_unique_values(load_data):
     assert unique_count == n  # Cambia 'n' por el valor que desees comparar
 
 # '''Caso de prueba 4: Identificar qué registros tienen valores duplicados en la columna id_producto.'''
-
 def test_duplicated_values_in_id_producto(load_data):
     """Caso de prueba 4: Identificar valores duplicados en id_producto."""
     duplicated = load_data[load_data['id_producto'].duplicated(keep=False)]
@@ -69,7 +66,6 @@ def test_duplicated_values_in_id_producto(load_data):
     assert not duplicated.empty  # Asegurarse de que existen duplicados
 
 # '''Caso de prueba 5: Contar cuántos valores duplicados existen en la columna id_producto.'''
-
 def test_count_duplicated_values(load_data):
     """Caso de prueba 5: Contar valores duplicados en id_producto."""
     duplicate_count = load_data['id_producto'].duplicated(keep=False).sum()
@@ -77,7 +73,6 @@ def test_count_duplicated_values(load_data):
     assert duplicate_count > 0  # Asegurarse de que existen duplicados
 
 # '''Caso de prueba 6: Confirmar que el número de valores duplicados coincide con un valor específico (n).'''
-
 def test_specific_count_duplicated_values(load_data):
     """Caso de prueba 6: Validar número específico de duplicados."""
     n = 4404  # Aquí coloca el número específico esperado
@@ -86,7 +81,6 @@ def test_specific_count_duplicated_values(load_data):
     assert duplicate_count == n  # Cambia 'n' por el valor que desees comparar
 
 # '''Caso de prueba 7: Comprobar que no existan registros nulos o vacíos en la columna id_producto.'''
-
 def test_no_null_values_in_id_producto(load_data):
     """Caso de prueba 7: Validar que no existan valores nulos o vacíos."""
     null_count = load_data['id_producto'].isnull().sum()
@@ -94,7 +88,6 @@ def test_no_null_values_in_id_producto(load_data):
     assert null_count == 0  # Asegurarse de que no hay nulos
 
 # '''Caso de prueba 8: Asegurar que todos los valores de la columna id_producto sean numéricos.'''
-
 def test_numeric_values_in_id_producto(load_data):
     """Caso de prueba 8: Validar que todos los valores sean numéricos."""
     non_numeric = load_data[~load_data['id_producto'].apply(lambda x: str(x).isdigit())]
@@ -102,7 +95,6 @@ def test_numeric_values_in_id_producto(load_data):
     assert non_numeric.empty  # Asegurarse de que no hay valores no numéricos
 
 # '''Caso de prueba 9: Asegurar que duplicados estén vinculados al mismo nombre_producto.'''
-
 def test_duplicates_linked_to_same_name(load_data):
     """Caso de prueba 9: Validar que duplicados estén asociados al mismo nombre_producto."""
     duplicates = load_data[load_data['id_producto'].duplicated(keep=False)]
@@ -111,7 +103,6 @@ def test_duplicates_linked_to_same_name(load_data):
     assert mismatch.sum() == 0  # Asegurarse de que no hay inconsistencias
 
 # '''Caso de prueba 10: Verificar que no existan registros con valores negativos en id_producto.'''
-
 def test_no_negative_values_in_id_producto(load_data):
     """Caso de prueba 10: Validar que no hay valores negativos."""
     negative_values = load_data[load_data['id_producto'] < 0]
@@ -119,7 +110,6 @@ def test_no_negative_values_in_id_producto(load_data):
     assert negative_values.empty  # Asegurarse de que no hay negativos
 
 # '''Caso de prueba 11: Asegurar que todos los valores sean positivos en id_producto.'''
-
 def test_all_positive_values_in_id_producto(load_data):
     """Caso de prueba 11: Validar que todos los valores sean positivos."""
     non_positive = load_data[load_data['id_producto'] <= 0]
