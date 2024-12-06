@@ -224,8 +224,7 @@ def test_exact_numeric_names_count(load_data, expected_count):
         #Casos con datos inválidos para trabajar con el parametrize
 
         # Caso 2: Asegurarse de que hay 5315 registros con caracteres especiales en 'nombre_cliente'.
-        ("Registros con caracteres especiales", 
-         lambda data: data['nombre_cliente'].str.contains('|'.join(special_char), na=False).sum(), 5315),
+        ("Registros con caracteres especiales", lambda data: data['nombre_cliente'].str.contains('|'.join(special_char), na=False).sum(), 5315),
         
         # Caso 4: Confirmar que hay 761 registros con el nombre 'Miguel Torres'.
         ("Registros con 'Miguel Torres'", lambda data: (data['nombre_cliente'] == 'Miguel Torres').sum(), 760),
