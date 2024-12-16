@@ -246,20 +246,22 @@ def test_exact_unknown_dates_count_error(load_data, expected_count):
 # Caso de prueba 20: Verificar si existen n registros con formatos distintos a YYYY-MM-DD
 @pytest.mark.parametrize("expected_count", [333])  # En el [] se coloca el número o valor esperado
 def test_exact_non_standard_dates_count_error(load_data, expected_count):
-    '''Caso de prueba 12: Verificar si existen n registros con formatos distintos a YYYY-MM-DD.'''
+    '''Caso de prueba 20: Verificar si existen n registros con formatos distintos a YYYY-MM-DD.'''
     # Contar registros no estándar
     data = load_data
     non_standard_dates_count = data['fecha_venta'].dropna().apply(
         lambda x: isinstance(x, str) and pd.to_datetime(x, format='%Y-%m-%d', errors='coerce') is pd.NaT).sum()
     # Comparar con el valor esperado
-    assert non_standard_dates_count == expected_count, f"Se esperaban {expected_count} registros no estándar, pero se encontraron {non_standard_dates_count}"
+    assert non_standard_dates_count == expected_count, f"Se esperaban {expected_count} registros no estándar, 
+        pero se encontraron {non_standard_dates_count}"
 
 # Caso de prueba 21: Verificar si existen exactamente n registros vacíos o nulos en fecha_venta
 @pytest.mark.parametrize("expected_count", [987])  # En el [] se coloca el número o valor esperado
 def test_exact_empty_or_null_dates_count_error(load_data, expected_count):
-    '''Caso de prueba 15: Verificar si existen exactamente n registros vacíos o nulos en fecha_venta.'''
+    '''Caso de prueba 21: Verificar si existen exactamente n registros vacíos o nulos en fecha_venta.'''
     # Contar registros vacíos o nulos
     data = load_data
     empty_or_null_dates_count = data['fecha_venta'].isnull().sum()
     # Comparar con el valor esperado
-    assert empty_or_null_dates_count == expected_count, f"Se esperaban {expected_count} registros vacíos o nulos, pero se encontraron {empty_or_null_dates_count}"
+    assert empty_or_null_dates_count == expected_count, f"Se esperaban {expected_count} registros vacíos o nulos, 
+        pero se encontraron {empty_or_null_dates_count}"
